@@ -28,13 +28,12 @@ class _LoginPageState extends State<LoginPage> {
     });
 
     try {
-      // ✅ Admin credentials check before API call
       if (trimmedEmail == "mfaris2k18@gmail.com" && trimmedPass == "111") {
         await showDialog(
           context: context,
           builder: (_) => AlertDialog(
             title: Text('Login Successful'),
-            content: Text('Welcome Admin!'),
+            content: Text('Welcome Mohammed Faris'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
@@ -44,16 +43,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
         );
 
-        // TODO: Navigate to admin home page if needed
-        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => AdminHomePage()));
-
         setState(() {
           _isLoading = false;
         });
         return;
       }
 
-      // Enable Dio logging
       _dio.interceptors.clear();
       _dio.interceptors
           .add(LogInterceptor(responseBody: true, requestBody: true));
@@ -89,9 +84,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           );
-
-          // TODO: Navigate to regular user home
-          // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => Myhome()));
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(data['message'] ?? "Login failed.")),
